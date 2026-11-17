@@ -1,5 +1,6 @@
 package com.tarea.api;
 
+import jdk.jfr.Category;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,4 +51,15 @@ public class EjerciciosController {
             return Map.of("mensaje", "Edad: " + edad + ". Es menor de edad");
         }
     }
+
+    @GetMapping("/api/categorias")
+    public List<Categoria> obtenerCategorias() {
+        return List.of(
+            new Categoria(1, "Laptops"),
+            new Categoria(2, "Smartphones"),
+            new Categoria(3, "Accesorios")
+        );
+    }
 }
+
+record Categoria(int id, String nombre) {}
