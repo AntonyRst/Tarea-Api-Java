@@ -1,11 +1,9 @@
 package com.tarea.api;
 
 import jdk.jfr.Category;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +51,11 @@ public class EjerciciosController {
         }
     }
 
-    private final List<Categoria> categorias = List.of(
+    private final List<Categoria> categorias = new ArrayList<>(List.of(
             new Categoria(1, "Laptops"),
             new Categoria(2, "Smartphones"),
             new Categoria(3, "Accesorios")
-    );
+    ));;
 
     @GetMapping("/api/categorias")
     public List<Categoria> obtenerCategorias() {
@@ -73,6 +71,12 @@ public class EjerciciosController {
             }
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/api/categorias")
+    public ResponseEntity<Categoria> agregarCategoria(@RequestBody Categoria nuevaCategoria) {
+        this.categorias.add(nuevaCategoria);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaCategoria);
     }
 }
 
