@@ -20,4 +20,14 @@ public class EjerciciosController {
         int suma = a + b;
         return Map.of("resultado: ", suma);
     }
+
+    @GetMapping("/api/temperatura/{celsius}")
+    public Map<String, Double> convertirTemperatura(@PathVariable double celsius) {
+        double fahrenheit = (celsius * 9.0 / 5.0) + 32.0;
+        return Map.of(
+                "celcius", celsius,
+                "fahrenheit", fahrenheit
+        );
+    }
+    
 }
