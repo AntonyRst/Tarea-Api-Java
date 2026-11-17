@@ -1,6 +1,7 @@
 package com.tarea.api;
 
 import jdk.jfr.Category;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,6 +62,17 @@ public class EjerciciosController {
     @GetMapping("/api/categorias")
     public List<Categoria> obtenerCategorias() {
         return this.categorias;
+    }
+
+    @GetMapping("/api/categorias/{id}")
+    public ResponseEntity<Categoria> obtenerCategoriaPorId(@PathVariable int id) {
+
+        for (Categoria categoria : this.categorias) {
+            if (categoria.id() == id) {
+                return ResponseEntity.ok(categoria);
+            }
+        }
+        return ResponseEntity.notFound().build();
     }
 }
 
