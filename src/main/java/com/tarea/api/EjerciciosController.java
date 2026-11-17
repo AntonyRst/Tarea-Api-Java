@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -29,5 +31,14 @@ public class EjerciciosController {
                 "fahrenheit", fahrenheit
         );
     }
-    
+
+    @GetMapping("/api/tabla/{numero}")
+    public List<String> generarTabla(@PathVariable int numero) {
+        List<String> tabla = new ArrayList<>();
+
+        for (int i = 1; i <= 10; i++) {
+            tabla.add(numero + " x " + i + " = " + (numero * i));
+        }
+        return tabla;
+    }
 }
