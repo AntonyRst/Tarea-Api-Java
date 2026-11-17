@@ -41,4 +41,13 @@ public class EjerciciosController {
         }
         return tabla;
     }
+
+    @GetMapping("/api/edad/{edad}")
+    public Map<String, String> esMayor(@PathVariable int edad) {
+        if (edad >= 18) {
+            return Map.of("mensaje", "Edad: " + edad + ". Es mayor de edad");
+        } else {
+            return Map.of("mensaje", "Edad: " + edad + ". Es menor de edad");
+        }
+    }
 }
