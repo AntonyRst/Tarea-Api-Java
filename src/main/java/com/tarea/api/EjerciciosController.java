@@ -52,13 +52,15 @@ public class EjerciciosController {
         }
     }
 
-    @GetMapping("/api/categorias")
-    public List<Categoria> obtenerCategorias() {
-        return List.of(
+    private final List<Categoria> categorias = List.of(
             new Categoria(1, "Laptops"),
             new Categoria(2, "Smartphones"),
             new Categoria(3, "Accesorios")
-        );
+    );
+
+    @GetMapping("/api/categorias")
+    public List<Categoria> obtenerCategorias() {
+        return this.categorias;
     }
 }
 
